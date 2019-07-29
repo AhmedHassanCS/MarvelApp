@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Marvel App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancel">Cancel</string>
+    <string name="search_hint">Search…</string>
+    <string name="name_label">NAME</string>
+    <string name="description_label">DESCRIPTION</string>
+    <string name="comics_label">COMICS</string>
+    <string name="series_label">SERIES</string>
+    <string name="stories_label">STORIES</string>
+    <string name="events_label">EVENTS</string>
+    <string name="links_label">RELATED LINKS</string>
+    <string name="detail_label">Detail</string>
+    <string name="wiki_label">Wiki</string>
+    <string name="comic_link_label">ComicLink</string>
+    <string name="no_description">No Description Available</string>
+    <string name="no_comics">NO COMICS</string>
+    <string name="no_series">NO SERIES</string>
+    <string name="no_stories">NO STORIES</string>
+    <string name="no_events">NO EVENTS</string>
+    <string name="connection_error">Check your internet connection</string>
+</resources>

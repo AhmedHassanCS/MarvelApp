@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                tools:context=".presentation.view.fragment.SearchFragment">
+    <RelativeLayout
+            android:id="@+id/searchBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+    >
+
+        <EditText
+                android:id="@+id/searchEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:hint="@string/search_hint"
+                android:background="@drawable/rounded_edge_white_bg"
+                android:drawablePadding="9dp"
+                android:drawableStart="@drawable/ic_search_dark"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_toStartOf="@+id/cancelSearchText"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="14sp"/>
+        <TextView
+                android:id="@+id/cancelSearchText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:textColor="@color/marvelRed"
+                android:text="@string/cancel"
+                android:padding="8dp"/>
+    </RelativeLayout>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/searchBarLayout"
+    >
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/searchRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+</RelativeLayout>
