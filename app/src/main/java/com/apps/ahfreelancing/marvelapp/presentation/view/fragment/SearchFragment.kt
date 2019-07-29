@@ -17,6 +17,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.navigation.Navigation
 import com.apps.ahfreelancing.marvelapp.R
+import com.apps.ahfreelancing.marvelapp.domain.model.CharacterModel
+import com.apps.ahfreelancing.marvelapp.presentation.adapter.CharactersAdapter
 import com.apps.ahfreelancing.marvelapp.presentation.adapter.ResultsAdapter
 import com.apps.ahfreelancing.marvelapp.presentation.viewModel.SearchViewModel
 import com.apps.ahfreelancing.marvelapp.presentation.viewModel.ViewModelFactory
@@ -88,7 +90,7 @@ class SearchFragment  : BaseFragment(){
     private fun setupRecycler(){
         resultsRecyclerView.layoutManager = LinearLayoutManager(activity)
 
-        resultsAdapter = ResultsAdapter(ArrayList(emptyList()), activity as Context)
+        resultsAdapter = ResultsAdapter(ArrayList(emptyList()), activity as Context, ItemClickCallback())
         resultsRecyclerView.adapter = resultsAdapter
 
     }
@@ -102,6 +104,15 @@ class SearchFragment  : BaseFragment(){
 
         override fun afterTextChanged(s: Editable?) {
             searchViewModel.updateSearch(s.toString())
+        }
+    }
+
+    inner class ItemClickCallback: ResultsAdapter.ItemClickCallback  {
+        override fun onItemClicked(character: CharacterModel){
+            if(view != null) {
+                val action = SearchFragmentDirections.actionSearchFragmentToCharacterDetailsFragment(character)
+                Navigation.findNavController(view!!).navigate(action)
+            }
         }
     }
 }

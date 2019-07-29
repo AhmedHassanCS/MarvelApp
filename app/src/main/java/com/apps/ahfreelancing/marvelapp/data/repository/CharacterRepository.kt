@@ -28,7 +28,7 @@ class CharacterRepository(context: Context) : ICharacterRepository {
             val cacheCharacters = charactersDao.getAll(
                 BuildConfig.PAGE_SIZE * (page - 1),
                 BuildConfig.PAGE_SIZE)
-            
+
             if(cacheCharacters.isNotEmpty()){
                 return DataWrapperModel(
                     200,"", mapCharactersToModel(cacheCharacters))
