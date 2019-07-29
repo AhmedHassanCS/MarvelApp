@@ -21,7 +21,7 @@ android {
         buildConfigField("String", "API_URL", "\"https://gateway.marvel.com:443/\"")
         buildConfigField("String", "API_KEY", "\"5f0dba11c6472d070b764e42d37abc94\"")
         buildConfigField("String", "PRIVATE_KEY", "\"7e76ecbf9ac4d6744df1f8fdd2ad87b382bae5ce\"")
-
+        buildConfigField("int", "PAGE_SIZE", "10")
     }
     buildTypes {
         release {

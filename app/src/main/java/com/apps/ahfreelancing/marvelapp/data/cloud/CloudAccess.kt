@@ -14,19 +14,18 @@ class CloudAccess {
 
 
     private val marvelAPI: MarvelAPI = RetrofitProvider.getRetrofit()!!.create(MarvelAPI::class.java)
-    private val PAGE_SIZE = 10
 
     //Get all characters from the api in pages
     suspend fun getCharacters(page: Int): DataWrapperEntity<CharacterEntity>? {
         //characters to skip based on page number
-        val skip = PAGE_SIZE * (page - 1)
+        val skip = BuildConfig.PAGE_SIZE * (page - 1)
         //timestamp to use as salt in encryption
         val ts = System.currentTimeMillis().toString()
         //hash is the encryption of the concat of (timestamp, private key and public key)
         val hash = Encryption.md5(ts + BuildConfig.PRIVATE_KEY + BuildConfig.API_KEY)
         var result: DataWrapperEntity<CharacterEntity>?
         try {
-            result = marvelAPI.getCharacters(BuildConfig.API_KEY, hash, ts, PAGE_SIZE, skip).body()
+            result = marvelAPI.getCharacters(BuildConfig.API_KEY, hash, ts, BuildConfig.PAGE_SIZE, skip).body()
         } catch (error: Exception) {
             result = DataWrapperEntity()
             result.code = 303

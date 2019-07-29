@@ -15,8 +15,8 @@ interface CharacterDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(characters: List<RoomCharacterEntity>)
 
-    @Query("SELECT * FROM character_table ORDER BY name LIMIT 10 OFFSET :offset")
-    suspend fun getAll(offset: Int) : List<RoomCharacterEntity>
+    @Query("SELECT * FROM character_table ORDER BY name LIMIT :pageSize OFFSET :offset")
+    suspend fun getAll(offset: Int, pageSize: Int) : List<RoomCharacterEntity>
 
     @Query("SELECT * FROM character_table WHERE name =:name ORDER BY name")
     suspend fun getByName(name: String) : List<RoomCharacterEntity>

@@ -1,6 +1,7 @@
 package com.apps.ahfreelancing.marvelapp.data.repository
 
 import android.content.Context
+import com.apps.ahfreelancing.marvelapp.BuildConfig
 import com.apps.ahfreelancing.marvelapp.data.cache.CharacterRoomDatabase
 import com.apps.ahfreelancing.marvelapp.data.cloud.CloudAccess
 import com.apps.ahfreelancing.marvelapp.data.repository.RoomEntityMapper.mapCharactersToEntity
@@ -24,7 +25,10 @@ class CharacterRepository(context: Context) : ICharacterRepository {
         val result = EntityMapper.mapCharacters(cloudAccess.getCharacters(page)!!)
         //If results not retrieved correctly from server fetch it from cache
         if(result.code != 200){
-            val cacheCharacters = charactersDao.getAll(10 * (page - 1))
+            val cacheCharacters = charactersDao.getAll(
+                BuildConfig.PAGE_SIZE * (page - 1),
+                BuildConfig.PAGE_SIZE)
+            
             if(cacheCharacters.isNotEmpty()){
                 return DataWrapperModel(
                     200,"", mapCharactersToModel(cacheCharacters))
