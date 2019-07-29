@@ -25,8 +25,8 @@ class ApiAccessTest {
         //Results can't be null
         assertNotNull(response!!.dataContainer.results)
 
-        //The returned page must contain only 10 elements
-        assertEquals(response!!.dataContainer.results.size, 10)
+        //The returned page must contain elements that equals PAGE_SIZE
+        assertEquals(response!!.dataContainer.results.size, BuildConfig.PAGE_SIZE)
 
     }
 
