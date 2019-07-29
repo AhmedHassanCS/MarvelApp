@@ -17,7 +17,9 @@ import com.apps.ahfreelancing.marvelapp.R
 import com.apps.ahfreelancing.marvelapp.domain.model.CharacterMediaModel
 import com.apps.ahfreelancing.marvelapp.domain.model.CharacterModel
 import com.apps.ahfreelancing.marvelapp.domain.model.DataWrapperModel
+import com.apps.ahfreelancing.marvelapp.domain.model.MediaModel
 import com.apps.ahfreelancing.marvelapp.presentation.adapter.MediaAdapter
+import com.apps.ahfreelancing.marvelapp.presentation.utilities.MediaListContainer
 import com.apps.ahfreelancing.marvelapp.presentation.utilities.WebUtility
 import com.apps.ahfreelancing.marvelapp.presentation.viewModel.CharacterDetailsViewModel
 import com.apps.ahfreelancing.marvelapp.presentation.viewModel.ViewModelFactory
@@ -144,16 +146,16 @@ class CharacterDetailsFragment : BaseFragment() {
         storiesRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         eventsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
-        comicsAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context)
+        comicsAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context, ItemClickCallback())
         comicsRecyclerView.adapter = comicsAdapter
 
-        seriesAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context)
+        seriesAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context, ItemClickCallback())
         seriesRecyclerView.adapter = seriesAdapter
 
-        storiesAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context)
+        storiesAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context, ItemClickCallback())
         storiesRecyclerView.adapter = storiesAdapter
 
-        eventsAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context)
+        eventsAdapter = MediaAdapter(ArrayList(emptyList()), activity as Context, ItemClickCallback())
         eventsRecyclerView.adapter = eventsAdapter
 
     }
@@ -199,14 +201,40 @@ class CharacterDetailsFragment : BaseFragment() {
     private fun handleEmpties(dataWrapper: DataWrapperModel<CharacterMediaModel>){
         if(dataWrapper.data.comics.isEmpty())
             comicsErrorTextView.visibility = View.VISIBLE
+        else
+            comicsErrorTextView.visibility = View.GONE
 
         if(dataWrapper.data.series.isEmpty())
             seriesErrorTextView.visibility = View.VISIBLE
+        else
+            seriesErrorTextView.visibility = View.GONE
 
         if(dataWrapper.data.stories.isEmpty())
             storiesErrorTextView.visibility = View.VISIBLE
+        else
+            storiesErrorTextView.visibility = View.GONE
 
         if(dataWrapper.data.events.isEmpty())
             eventsErrorTextView.visibility = View.VISIBLE
+        else
+            eventsErrorTextView.visibility = View.GONE
+    }
+
+    private fun navigateToMediaFragment(mediaList: List<MediaModel>, position: Int){
+        if(mediaList.isEmpty())
+            return
+        val tempList = MediaListContainer()
+        tempList.addAll(mediaList)
+        val action = CharacterDetailsFragmentDirections.actionCharacterDetailsToMediaList(tempList, position)
+        Navigation.findNavController(view!!).navigate(action)
+
+    }
+
+    inner class ItemClickCallback: MediaAdapter.ItemClickCallback  {
+        override fun onItemClicked(media: ArrayList<MediaModel>, position: Int){
+            if(view != null) {
+                navigateToMediaFragment(media, position)
+            }
+        }
     }
 }

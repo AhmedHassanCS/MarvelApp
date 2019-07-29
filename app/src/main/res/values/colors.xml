@@ -6,4 +6,7 @@
     <color name="colorAccent">#f02322</color>
     <color name="marvelRed">#f02322</color>
     <color name="white">#fff</color>
+    <color name="gray_light">#282c30</color>
+    <color name="gray_dark">#1f2326</color>
+    <color name="transparent">#00000000</color>
 </resources>

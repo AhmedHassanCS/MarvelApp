@@ -26,5 +26,19 @@
         <argument
                 android:name="character"
                 app:argType="com.apps.ahfreelancing.marvelapp.domain.model.CharacterModel" />
+        <action android:id="@+id/action_characterDetails_to_mediaList"
+                app:destination="@id/mediaListFragment"/>
+    </fragment>
+
+    <fragment android:id="@+id/mediaListFragment"
+              android:name="com.apps.ahfreelancing.marvelapp.presentation.view.fragment.MediaListFragment"
+              android:label="fragment_media_list" tools:layout="@layout/fragment_media_list">
+        <argument
+                android:name="media"
+                app:argType="com.apps.ahfreelancing.marvelapp.presentation.utilities.MediaListContainer" />
+        <argument
+                android:name="position"
+                app:argType="integer" />
+
     </fragment>
 </navigation>
